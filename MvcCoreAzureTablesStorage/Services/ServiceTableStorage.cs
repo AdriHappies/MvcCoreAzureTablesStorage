@@ -10,7 +10,7 @@ namespace MvcCoreAzureTablesStorage.Services
     public class ServiceTableStorage
     {
         private CloudTable tablaClientes;
-        private ServiceTableStorage(string keys)
+        public ServiceTableStorage(string keys)
         {
             CloudStorageAccount account = CloudStorageAccount.Parse(keys);
             CloudTableClient client = account.CreateCloudTableClient();
@@ -66,14 +66,14 @@ namespace MvcCoreAzureTablesStorage.Services
             return cliente;
         }
 
-        public async Task DeleteCliente(string rowkey, string partitionkey)
+        public async Task DeleteClienteAsync(string rowkey, string partitionkey)
         {
             Cliente cliente = await this.FindClienteAsync(rowkey, partitionkey);
             TableOperation delete = TableOperation.Delete(cliente);
             await this.tablaClientes.ExecuteAsync(delete);
         }
 
-        public async Task UpdateCliente(string rowkey, string partitionkey, string nombre, string edad)
+        public async Task UpdateClienteAsync(string rowkey, string partitionkey, string nombre, string edad)
         {
             Cliente cliente = await this.FindClienteAsync(rowkey, partitionkey);
             cliente.Nombre = nombre;

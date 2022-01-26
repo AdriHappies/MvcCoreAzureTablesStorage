@@ -1,0 +1,105 @@
+﻿@model IEnumerable<MvcCoreAzureTablesStorage.Models.Cliente>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+
+<p>
+    <a asp-controller="TableStorage" asp-action="ClientesEmpresa">
+        Buscar clientes por empresa
+    </a>
+</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.IdCLiente)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Empresa)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Nombre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Edad)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PartitionKey)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RowKey)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Timestamp)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ETag)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IdCLiente)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Empresa)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nombre)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Edad)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PartitionKey)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.RowKey)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Timestamp)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ETag)
+                </td>
+                <td>
+                    <a asp-controller="TableStorage"
+                       asp-action="Edit"
+                       asp-route-rowkey="@item.RowKey"
+                       asp-route-partitionkey="@item.PartitionKey"
+                       class="btn btn-warning">
+                        Edit
+                    </a>
+                    |
+                    <a asp-controller="TableStorage"
+                       asp-action="Details"
+                       asp-route-rowkey="@item.RowKey"
+                       asp-route-partitionkey="@item.PartitionKey"
+                       class="btn btn-info">
+                        Details
+                    </a>
+                    |
+                    <a asp-controller="TableStorage"
+                       asp-action="Delete"
+                       asp-route-rowkey="@item.RowKey"
+                       asp-route-partitionkey="@item.PartitionKey"
+                       class="btn btn-danger">
+                        Delete
+                    </a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
